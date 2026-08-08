@@ -8,40 +8,7 @@ Small and mid sized teams usually don't need a huge data platform, they need the
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    subgraph Sources
-        A1[REST APIs]
-        A2[CSV / SFTP drops]
-        A3[Database replicas]
-    end
-
-    Sources --> B[Extractors - Python, shared pagination + retry pattern]
-    B --> C[(Raw layer - BigQuery / Snowflake, untransformed)]
-    C --> D[dbt staging: type, dedupe, standardize]
-    D --> E[dbt marts: business logic, joins]
-    E --> F1[BI tools]
-    E --> F2[Reverse ETL back to CRM / ad platforms]
-
-    subgraph Orchestration
-        G[Airflow DAG]
-    end
-
-    G -.schedules + retries.-> B
-    G -.schedules + retries.-> D
-    G -.on failure.-> H[Slack alert]
-
-    classDef source fill:#F5F4FA,stroke:#644aab,color:#333
-    classDef extract fill:#fff3cd,stroke:#d35400,color:#333
-    classDef model fill:#e0f2f1,stroke:#00796b,color:#333
-    classDef output fill:#e8f5e9,stroke:#1e8449,color:#333
-    classDef orch fill:#eceff1,stroke:#607d8b,color:#333
-    class A1,A2,A3 source
-    class B,C extract
-    class D,E model
-    class F1,F2 output
-    class G,H orch
-```
+![Architecture diagram](diagram.svg)
 
 The extractors only ever land data, they never transform it. That split matters more than it looks: it means the extractors stay dumb and reliable, and all the business logic, currency conversion, deduplication, join keys, lives in dbt where it's version controlled, testable, and visible to anyone reviewing the project, instead of buried inside a script somewhere.
 

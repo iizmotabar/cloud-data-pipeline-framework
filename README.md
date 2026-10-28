@@ -1,6 +1,6 @@
 # Cloud Data Pipeline Framework
 
-An extract, load, transform framework for standing up a proper data warehouse from scratch, the kind of setup I build at [motabar.builds.stuff](https://motabar.builds.stuff) when a client has data scattered across five tools and no single place to query it.
+An extract, load, transform framework for standing up a proper data warehouse from scratch, the kind of setup I build at [motabar.builds.stuff](https://motabarbuildstuff.com/) when a client has data scattered across five tools and no single place to query it.
 
 ## The problem this solves
 
@@ -38,3 +38,11 @@ Every pipeline starts the same way regardless of the client: land raw data with 
 ## Stack
 
 Python, BigQuery, Snowflake, dbt, Airflow
+
+## Related
+
+* Case study: [End-to-End Marketing ETL Pipelines](https://motabarbuildstuff.com/case-studies/end-to-end-marketing-etl-pipelines/)
+* Case study: [Single Source of Truth for Marketing Data](https://motabarbuildstuff.com/case-studies/single-source-of-truth-for-marketing-data/)
+* Service: [All analytics and tracking services](https://motabarbuildstuff.com/services/)
+
+Built by [Motabar Javaid](https://motabarbuildstuff.com/about/), analytics engineer at [motabar.builds.stuff](https://motabarbuildstuff.com/).
